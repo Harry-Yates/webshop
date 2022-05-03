@@ -1,14 +1,40 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Row, Col, Image, ListGroup, Card, Button, ListGroupItem } from "react-bootstrap";
 import Rating from "../components/Rating";
-import products from "../products";
 
-const ProductScreen = () => {
-    // const { id } = useParams();
-    // const product = products.find(product => product._id === Number(id));
-    const product = products[0];
+const ProductScreen = props => {
+    // Grab id param from url
+    const { id } = useParams();
+    // If props is not an empty object, spread props in product - else set product to empty object
+    const [product, setProduct] = useState(
+        Object.entries(props).length !== 0 ? { ...props } : {},
+    );
 
+    //TODO Not Working :(
+    useEffect(() => {
+        const getProduct = async () => {
+            try {
+                const response = await fetch(`http://localhost:5050/api/products/${id}`);
+                console.log("Fetched product");
+                return await response.json();
+            } catch (err) {
+                console.log(err);
+                console.log("Product couldn't be found.");
+            }
+        };
+
+        // If product is empty, fetch product from API
+        if (Object.entries(product).length === 0) {
+            getProduct().then(data => {
+                // Update product with fetched data
+                setProduct(data);
+            });
+        }
+    }, [id, product]);
+
+    console.log(product);
     return (
         <>
             <Link className='btn btn-light my-3' to='/'>
