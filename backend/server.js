@@ -1,20 +1,22 @@
-const express = require("express");
-const dotenv = require("dotenv");
-const products = require("./data/products");
+import express from "express";
+import dotenv from "dotenv";
+import products from "./data/products.js";
+//Converted common js (require()) syntax to ES Modules import syntax.
+//I needed to add type module in the package.json to get this working.
+//I also needed to include a.js on my files
 
 dotenv.config();
 //This enables environment variables.
 
 const app = express();
-
 // Initialise express with the variable "app"
 
 //Shows Server is running
 app.get("/", (req, res) => {
-    res.send("API is running....");
+    res.send("API is running...");
 });
 
-//API Route gets all prducts
+//API Route gets all products
 app.get("/api/products", (req, res) => {
     res.json(products);
 });
