@@ -7,7 +7,7 @@ const app = express();
 
 //Shows Server is running
 app.get("/", (req, res) => {
-    res.send("API is running...");
+    res.send("API is running....");
 });
 
 //API Route gets all prducts

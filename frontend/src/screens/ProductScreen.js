@@ -12,7 +12,7 @@ const ProductScreen = props => {
         Object.entries(props).length !== 0 ? { ...props } : {},
     );
 
-    //TODO Not Working :(
+    //TODO Not Working :( - try and fix when MongoDb is set up
     useEffect(() => {
         const getProduct = async () => {
             try {
